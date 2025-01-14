@@ -10,7 +10,7 @@ class users
     private $Nom;
     private $Email;
     private $Password;
-    private Role $Role;
+    private $Role;
     private $Photo;
     private $status;
     private $cours = [];
