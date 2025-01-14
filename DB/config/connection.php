@@ -12,7 +12,6 @@ class Connection
         {
             $conn = new PDO($this->dsn,$this->username,$this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-            echo "the connection is connected";
             return $conn;
         }
         catch(PDOException $error)

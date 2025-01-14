@@ -1,6 +1,7 @@
 <?php
 
 require_once("../../App/Modules/Role.php");
+require_once("CrudModel.php");
 
 
 class users
@@ -17,6 +18,8 @@ class users
     public function __construct()
     {
         $this->Role = new Role();
+        
+
     }
 
 
@@ -26,6 +29,12 @@ class users
         {
             var_dump($arguments);
         }
+    }
+
+    public function register($table,$infos)
+    {
+        $crud = new CrudModel();
+        $crud->Create($table,$infos);
     }
 
     public function GetId()
@@ -99,12 +108,6 @@ class users
     }
 
 }
-
-
-
-$newuser = new users();
-
-$newuser->test1('hello','helljd','fjfjd','dfjjdd');
 
 
 
