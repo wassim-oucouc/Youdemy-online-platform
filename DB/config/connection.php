@@ -23,6 +23,5 @@ class Connection
 }
 
 
-$try = new connection();
-$try->connection();
+
 ?>
