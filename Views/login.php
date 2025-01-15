@@ -20,20 +20,20 @@
         
         <div class="right-panel">
                     <div class="form-container">
-                <form id="loginForm">
+                <form id="loginForm" action = "../../App/Controllers/AuthController.php" method = "POST">
                     <div class="form-header">
                         <h2>Welcome Back</h2>
                         <p>Please sign in to your account</p>
                     </div>
                     <div class="form-group">
                         <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        <input name = "email" type="email" id="loginEmail" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <input name = "password" type="password" id="loginPassword" placeholder="Enter your password" required>
                     </div>
-                    <button type="submit" class="submit-btn">Sign In</button>
+                    <button name = "login"type="submit" class="submit-btn">Sign In</button>
                     <div class="switch-form">
                         Don't have an account?<a href="register.php">Register</a>
                     </div>

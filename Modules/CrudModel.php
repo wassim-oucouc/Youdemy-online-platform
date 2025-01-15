@@ -10,10 +10,6 @@ class CrudModel
     }
     public function Create($Table,$names)
     {
-        if(isset($names['Password']))
-        {
-            $names['Password'] = password_hash($names['Password'], PASSWORD_DEFAULT);
-        }
        $columns = implode(',',array_keys($names));
        $values = implode(',',array_values($names));
 
@@ -46,13 +42,24 @@ class CrudModel
         $ist->execute();
 }
 
-public function SelectById($Table,$id)
+public function FindById($Table,$id)
 {
     $query = 'SELECT * FROM ' . $Table . ' WHERE ID = :id';
     $ist = $this->connection->connection()->prepare($query);
     $ist->Bindparam(':id',$id);
     $ist->execute();
    return  $ist->fetchObject();
+}
+
+public function SelectRoleByEmail($table,$email)
+{
+    $query = 'SELECT Role FROM ' . $table . ' WHERE Email = :email';
+    $ist = $this->connection->connection()->prepare($query);
+    $ist->Bindparam(':email',$email);
+    $ist->execute();
+     $ist->fetch(PDO::FETCH_ASSOC);
+
+
 }
 
 public function update($table,$names,$id)
@@ -63,7 +70,7 @@ public function update($table,$names,$id)
     array_push($Setupdate,"$key = :$key");
   }
 
-  $newhold = implode(",",$setclause);
+  $newhold = implode(",",$Setupdate);
 
 //   die($newhold);
 
@@ -115,6 +122,8 @@ public function DeleteById($Table,$id)
         }
         return $newarray;
     }
+
+
 
   
 

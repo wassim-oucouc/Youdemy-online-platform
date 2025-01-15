@@ -2,9 +2,11 @@
 
 require_once("../../App/Modules/Role.php");
 require_once("CrudModel.php");
+include_once("../../App/DB/config/connection.php");
 
 
-class users
+
+class Users
 {
     private $Id;
     private $Prenom;
@@ -18,6 +20,7 @@ class users
     public function __construct()
     {
         $this->Role = new Role();
+        $this->connection = new connection(); 
         
 
     }
@@ -36,7 +39,25 @@ class users
         $crud = new CrudModel();
         $crud->Create($table,$infos);
     }
+    public function SelectEmailAndPassword($email,$Password)
+    {
+        $query = 'SELECT * FROM users where Email = :email AND Password = :password ';
+      $ist = $this->connection->connection()->prepare($query);
+      $ist->bindValue(':email',$email);
+      $ist->bindValue(':password',$Password);
+      $ist->execute();
+     
+     $row = $ist->fetch(PDO::FETCH_ASSOC);
 
+
+     if($row)
+     {
+        $crud = new CrudModel();
+     $role =  $crud->SelectRoleByEmail('users',$email);
+  var_dump($role);
+
+    }
+    }
     public function GetId()
     {
         return $this->Id;
@@ -108,6 +129,10 @@ class users
     }
 
 }
+
+
+$newuser = new Users();
+$newuser->SelectEmailAndPassword('mysuf@mailinator.com','Pa$$w0rd!');
 
 
 
