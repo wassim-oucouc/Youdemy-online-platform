@@ -1,6 +1,6 @@
 <?php
 
-include_once('../../App/Modules/users.php');
+include_once('.././App/Modules/users.php');
 
 
 
@@ -20,8 +20,7 @@ class RegisterController
         $this->users->register('users',$arrayinfo);
         // header('location : ../../App/Views/login.php');
         }
-        header('Location: ../../App/Views/login.php');
-        require_once('../../App/Views/register.php');
+        require_once('.././App/Views/register.php');
 
 
 
@@ -31,7 +30,6 @@ class RegisterController
 
 }
 
-$register = new RegisterController();
-$register->register();
+
 
 ?>

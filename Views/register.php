@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLearn - Sign In & Register</title>
-    <link rel="stylesheet" href="../../App/Src/css/register-login.css">
+    <link rel="stylesheet" href=".././App/Src/css/register-login.css">
 </head>
 <body>
     <div class="container">
@@ -22,7 +22,7 @@
       
         <div class="right-panel">
                     <div class="form-group">
-                    <form action="../../App/Controllers/RegisterController.php" method = "POST">
+                    <form action="../App/index.php?action=register" method = "POST">
                         <label for="regPrenom">First Name</label>
                         <input name ="firstname" id = "firstname" type="text"  placeholder="Enter your first name" required>
                     </div>

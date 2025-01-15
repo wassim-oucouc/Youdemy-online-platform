@@ -47,17 +47,19 @@ class Users
       $ist->bindValue(':password',$Password);
       $ist->execute();
      
-     $row = $ist->fetch(PDO::FETCH_ASSOC);
+     return $ist->fetch();
+  
 
 
-     if($row)
-     {
-        $crud = new CrudModel();
-     $role =  $crud->SelectRoleByEmail('users',$email);
-  var_dump($role);
 
-    }
-    }
+  
+}
+
+public function DeleteUser()
+{
+
+}
+
     public function GetId()
     {
         return $this->Id;

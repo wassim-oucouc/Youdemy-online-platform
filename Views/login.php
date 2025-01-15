@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLearn - Sign In & Register</title>
-    <link rel="stylesheet" href="../../App/Src/css/register-login.css">
+    <link rel="stylesheet" href=".././App/Src/css/register-login.css">
 </head>
 <body>
     <div class="container">
@@ -20,11 +21,13 @@
         
         <div class="right-panel">
                     <div class="form-container">
-                <form id="loginForm" action = "../../App/Controllers/AuthController.php" method = "POST">
+                <form id="loginForm" action = "../App/index.php?action=login" method = "POST">
+
                     <div class="form-header">
                         <h2>Welcome Back</h2>
                         <p>Please sign in to your account</p>
                     </div>
+                  <h3>  <?php echo htmlspecialchars($this->error); ?> </h3>
                     <div class="form-group">
                         <label for="loginEmail">Email</label>
                         <input name = "email" type="email" id="loginEmail" placeholder="Enter your email" required>
