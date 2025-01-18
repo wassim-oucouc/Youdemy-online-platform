@@ -27,19 +27,19 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="courses.php" class="nav-link">
+                        <a href="/courses" class="nav-link">
                             <i class="fas fa-book"></i>
                             <span>Courses</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="categories.php" class="nav-link">
+                        <a href="/categories" class="nav-link">
                             <i class="fas fa-tags"></i>
                             <span>Categories</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="categories.php" class="nav-link">
+                        <a href="/Admin-Tags" class="nav-link">
                             <i class="fas fa-tags"></i>
                             <span>Tags</span>
                         </a>
@@ -57,13 +57,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="admin-reports.html" class="nav-link">
+                        <a href="/reports" class="nav-link">
                             <i class="fas fa-chart-bar"></i>
                             <span>Reports</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="admin-settings.html" class="nav-link">
+                        <a href="/settings-admin" class="nav-link">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>
@@ -152,7 +152,7 @@
                         {
                             echo '
                              <tr>
-                            <td>'. $value['Nom'] . $value['Prenom'] .'</td>
+                            <td>'. $value['Nom'] . " " . $value['Prenom'] .'</td>
                             <td>'. $value['Role'] .'</td>
                             <td>5</td>  
                             <td>'. $value['JoinDate'] .'</td>

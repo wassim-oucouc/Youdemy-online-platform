@@ -18,6 +18,7 @@
                 </div>
                 <span class="brand-name">YOUDEMY</span>
             </div>
+
             <nav>
                 <ul class="nav-menu">
                     <li class="nav-item">
@@ -71,13 +72,13 @@
                 </ul>
             </nav>
         </aside>
-
         <main class="main-content">
             <header class="header">
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
                     <input type="text" class="search-input" placeholder="Search...">
                 </div>
+
                 <div class="header-actions">
                     <button class="notification-btn">
                         <i class="fas fa-bell"></i>
@@ -88,92 +89,76 @@
                     </div>
                 </div>
             </header>
-
             <section class="table-container">
                 <div class="section-header">
                     <button class="add btn btn-primary">
                         <i class="fas fa-plus"></i>
-                        Add Categories
+                        Add Tags
                     </button>
                 </div>
-                    <div class="bg-white border border-4 rounded-lg shadow relative m-10">
-                        <div class="flex items-start justify-between p-5 border-b rounded-t">
-                              
-                             
-                            </button>
-                    </div>
-                    <div class="categories-form p-6 space-y-6">
-                        <form action="" method="POST">
-                            <div class="grid grid-cols-6 gap-6">
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Nom Categorie</label>
-                                    <input type="text" name="name" id="product-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Apple Imac 27”" required="">
-                                </div>
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="brand" class="text-sm font-medium text-gray-900 block mb-2">Description</label>
-                                    <input type="text" name="Description" id="brand" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Apple" required="">
-                                </div>
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="price" class="text-sm font-medium text-gray-900 block mb-2">Specialite</label>
-                                    <input type="text" name="Specialite" id="price" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="$2300" required="">
-                                </div>
-                            </div>
-                            <div class="p-6 border-t border-gray-200 rounded-b">
-                                <button name="send" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Add Categorie</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nom Tag</th>
-                            <th>Description</th>
-                            <th>Specialite</th>
-                            <th>Created_AT</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach($row as $value)
-                        {
-                            echo 
-                            '
-                            <tr>
-                                <td>'. $value['Nom'].'</td>
-                                <td>'. $value['Description'].'</td>
-                                <td>'. $value['Specialite'].'</td>
-                                <td>'. $value['Created_AT'].'</td>
-                                <td>
-                                    <a href="C:\xampp\htdocs\Youdemy\App\Controllers\AdminController.php" class="btn" style="color: var(--primary);">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="/delete-categorie" method="POST">
-                                        <input type="hidden" name="id" value="'.$value['ID'].'">
-                                        <button class="fas fa-trash" type="submit"></button>
-                                    </form>
-                                </td>
-                            </tr>';
-                        }
-                        ?>
-                    
-
-                            <script>
-    const form_tags = document.querySelector('.categories-form');
+                <form action = "/Admin-Tags" METHOD = "POST" class="tags-form max-w-sm mx-auto">
+  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insert Your Tags Here</label>
+  <input name ="tags"id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></input>
+  <button name ="sendtags" class="add btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Add
+                    </button>
+</form>
+<script>
+    const form_tags = document.querySelector('.tags-form');
     const add_tags = document.querySelector('.add');
     // form_tags.style.display = 'none';
 
     console.log(add_tags);
 
-    add_tags.addEventListener('click', function () {
-        if (form_tags.style.display === 'block') {
-            form_tags.style.display = 'none';
-        } else {
-            form_tags.style.display = 'block';
-        }
-    });
-</script>
+    add_tags.addEventListener('click',function(){
+        if(form_tags.style.display == 'block')
+    {
+        form_tags.style.display = 'none';
+    }
+    else
+    {
+        form_tags.style.display = 'block'
+    }
+    })
+
+    </script>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom Tag</th>
+                            <th>Created_AT</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <?php
+                    //    $row = $row ?? []; 
+                       foreach($row as $key => $value)
+                       {
+                        echo
+                        '
+                             <tr>
+                            <td>'. $value['Nom'].'</td>
+                            <td>'. $value['Created_At'].'</td>
+                             <td>'. $value['Created_At'].'</td>
+                              <td>'. $value['Created_At'].'</td>
+                               <td>'. $value['Created_At'].'</td>
+    
+                            <td>
+                               
+                                <a href = "C:\xampp\htdocs\Youdemy\App\Controllers\AdminController.php" class "btn" style="color: var(--primary);">
+                                <i  class="fas fa-edit"></i></a>
+                                <form action="/delete-user" method="POST">
+    <input type="hidden" name="id" value="'.$value['ID'].'">
+    <button class="fas fa-trash" type="submit"></button>
+</form>
+                            </td>
+                            <tr>';
+                       }
+                            ?>
+                    
                     </tbody>
                 </table>
             </section>

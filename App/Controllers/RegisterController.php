@@ -15,13 +15,22 @@ class RegisterController
     {
         if(isset($_POST['submit']))
         {
-        $arrayinfo = ['Prenom' => $_POST['firstname'] , 'Nom' => $_POST['lastname'] , 'Email' => $_POST['email'] , 'Password' => $_POST['password'] , 'Photo' => $_POST['photo']];
-
-        $this->users->register('users',$arrayinfo);
-        header('Location: http://localhost:8088/login');
+        $arrayinfoEtudiant = ['Prenom' => $_POST['firstname'] , 'Nom' => $_POST['lastname'] , 'Email' => $_POST['email'] , 'Password' => $_POST['password'] , 'Role' => $_POST['Role'] , 'Status' => 'Active'];
+        $arrayinfoEnseignant = ['Prenom' => $_POST['firstname'] , 'Nom' => $_POST['lastname'] , 'Email' => $_POST['email'] , 'Password' => $_POST['password'] , 'Role' => $_POST['Role'] , 'Status' => 'Pending'];
+        if($_POST['Role'] == 'Etudiant')
+        {
+        $this->users->register('users',$arrayinfoEtudiant);
+        header('Location: /login');
         }
-        require_once('.././App/Views/register.php');
+        else if($_POST['Role'] == 'Enseignant')
+        {
+            $this->users->register('users',$arrayinfoEnseignant);
+            header('location: /PendingUser');
+
+        }
     }
+    require_once('.././App/Views/register.php');
+}
 
 
 

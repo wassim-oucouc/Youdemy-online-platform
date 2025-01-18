@@ -1,7 +1,8 @@
 <?php
 
-require_once("../../App/Modules/tag.php");
-require_once("../../App/Modules/Categorie.php");
+require_once(".././App/Modules/tags.php");
+require_once(".././App/Modules/Categorie.php");
+require_once(".././App/Modules/CrudModel.php");
 class Cours
 {
    private $ID_Cours;
@@ -12,9 +13,17 @@ class Cours
    private $Tag = [];
    private categorie $Categorie;
    private $Etudiants = [];
+   private crudmodel $crudmodel;
 
    public function __construct()
-   {}
+   {
+    $this->crudmodel = new CrudModel();
+   }
+
+   public function InsertCourse($table,$names)
+   {
+    $this->crudmodel->Create($table,$names);
+   }
 
 public function GetId()
 {

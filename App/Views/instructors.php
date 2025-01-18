@@ -228,7 +228,7 @@ echo
                         </div>
                     </div>
                     <div class="instructor-content">
-                        <h3 class="instructor-name">'.$value['Nom'] . '</h3>
+                        <h3 class="instructor-name">'.$value['Nom'] . " " . $value['Prenom'] . '</h3>
                         <p class="instructor-title">Senior Web Developer</p>
                         
                         <div class="instructor-stats">

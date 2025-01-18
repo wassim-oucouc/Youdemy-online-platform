@@ -22,7 +22,7 @@
       
         <div class="right-panel">
                     <div class="form-group">
-                    <form action="" method = "POST">
+                    <form action="/register" method = "POST">
                         <label for="regPrenom">First Name</label>
                         <input name ="firstname" id = "firstname" type="text"  placeholder="Enter your first name" required>
                     </div>
@@ -39,14 +39,15 @@
                         <input name = "password" type="password" id="regPassword" placeholder="Create a password" required>
                     </div>
                     <div class="form-group">
-                        <label>Photo</label>
-                        <div class="photo">
-                        <input name = "photo" type="text" id="photo" placeholder="insert your photo here" required>
-                        </div>
+                        <label>Vous Etes</label>
+                        <select name ="Role" class ="Role" id="Role">
+                <option value="Etudiant">Etudiant</option>
+             <option value="Enseignant">Enseignant</option>
+</select>
                     </div>
                     <button name = "submit"type="submit" class="submit-btn">Create Account</button>
                     <div class="switch-form">
-                        Already have an account?<a href="login.php">Sign In</a>
+                        Already have an account?<a href="/login">Sign In</a>
                     </div>
                 </form>
             </div>

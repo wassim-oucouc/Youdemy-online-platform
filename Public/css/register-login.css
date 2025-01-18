@@ -13,6 +13,12 @@ body {
     align-items: center;
     padding: 20px;
 }
+.Role{
+    height: 44px;
+    width:300px;
+    border-radius: 13px;
+    text-align: start;
+}
 
 .container {
     width: 100%;

@@ -27,7 +27,9 @@
                         <h2>Welcome Back</h2>
                         <p>Please sign in to your account</p>
                     </div>
-                  <h3>  <?php echo htmlspecialchars($this->error); ?> </h3>
+                  <h3 style="color:red;">  <?php echo htmlspecialchars($this->error); ?> </h3>
+                  <h3 style="color:red;">  <?php echo htmlspecialchars($this->MessagePending); ?> </h3>
+                  <h3 style="color:red;">  <?php echo htmlspecialchars($this->MessageSuspendu); ?> </h3>
                     <div class="form-group">
                         <label for="loginEmail">Email</label>
                         <input name = "email" type="email" id="loginEmail" placeholder="Enter your email" required>

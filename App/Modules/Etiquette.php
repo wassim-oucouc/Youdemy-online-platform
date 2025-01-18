@@ -2,11 +2,13 @@
 
 abstract class Etiquette
 {
-    private $id;
-    private $Nom;
-    private $Description;
-    private $Logo;
+    protected $id;
+    protected $Nom;
+    protected $Description;
+    protected $Logo;
 
+
+    abstract public function Insert($table,$id);
 
     public function GetId()
     {

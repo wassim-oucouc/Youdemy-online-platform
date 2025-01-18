@@ -12,11 +12,16 @@ class AdminController
 public function admin_dashboard()
 {
 session_start();
-    if(isset($_SESSION))
+    if(isset($_SESSION['id']))
     {
         $rows =  $this->users->findAllusers('users');
         require_once('.././App/Views/dashboard-admin.php');
         echo $_SESSION['id'];
+    }
+    else
+    {
+        header('Location: /login');
+
     }
     // require_once('.././App/Views/dashboard-admin.php');
 }
@@ -53,6 +58,11 @@ public function Users()
     $rows =  $this->users->findAllusers('users');
     require_once('.././App/Views/users.php');
 
+}
+
+public function categories()
+{
+    
 }
 }
 
