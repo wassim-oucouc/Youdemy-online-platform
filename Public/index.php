@@ -6,6 +6,9 @@ include_once('../App/Controllers/TagsController.php');
 include_once('../App/Controllers/CategorieController.php');
 include_once('../App/Controllers/EnseignantController.php');
 include_once('../App/Controllers/courseController.php');
+include_once(".././App/DB/config/connection.php");
+include_once('../App/Controllers/EtudiantController.php');
+
 $route =  $_SERVER['REQUEST_URI'];
 // echo "<pre>";
 // echo "Request URI: " . $_SERVER['REQUEST_URI'] . "\n";
@@ -48,6 +51,10 @@ switch($route)
     }
     break;
 
+
+
+
+
     case '/instructors':
         session_start();
         if(isset($_SESSION['id']))
@@ -61,6 +68,7 @@ switch($route)
         }
         break;
     case '/admin/banuser':
+        session_start();
         if(isset($_SESSION['id']))
         {
         // header('Location: /dashboard-admin');
@@ -76,6 +84,10 @@ switch($route)
     exit();
         }
     }
+    }
+    else
+    {
+        echo "pas de session";
     }
     break;
 
@@ -94,6 +106,10 @@ switch($route)
     }
     break;
 
+
+
+
+
     case '/users':
         session_start();
         if(isset($_SESSION['id']))
@@ -109,6 +125,21 @@ switch($route)
     case '/PendingUser':
     require_once('../App/Views/MessageEnseignant.php');
     break;
+    case '/Admin-courses':
+    $course = new CourseController();
+    $course->index();
+
+    $affichachecours = new CourseController();
+    $cours = $affichachecours->AffichageCours();
+require_once('../App/Views/courses.php');
+    // var_dump($cours);
+
+
+    break;
+    
+
+
+
 
 
     case '/etudiant':
@@ -116,7 +147,15 @@ require_once('../App/Views/dashboard-etudiant.php');
 break;
 
 case '/my-courses':
+    session_start();
+    if (!isset($_SESSION['id'])) {
+        header('Location: /login');
+        exit();
+    }
+    else
+    {
     require_once('../App/Views/My-courses.php');
+    }
     break;
     case '/Admin-Tags':
         $tags = new TagsController();
@@ -135,7 +174,11 @@ case '/my-courses':
     break;
 
 
+
+
+
     case '/Admin-categories':
+        ob_start();
     $categorie = new CategorieController();
     $categorie->index();
 
@@ -154,14 +197,80 @@ case '/my-courses':
         $specialite =    [];
     }
     $findcategorie = new CategorieController();
-
-    $findcategorie->Findcategories('categorie');
+    
+    $row = $findcategorie->Findcategories('categorie');
+    require_once('../App/Views/categories.php');
+    // var_dump($row);
+    
     break;
 
 
 
-    case '/Etudiant-dashboard':
+    case '/dashboard-etudiant':
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+            exit();
+        }
+        else
+        {
+
+        $affichage = new EtudiantController();
+        $EtudiantCours = $affichage->affichagecourses();
+  
+        var_dump($EtudiantCours);
+        require_once('../App/Views/dashboard-etudiant.php');
+        }
+    break;
+
+
+    case '/all-courses':
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+            exit();
+        }
+        else
+        {
+        $affichage = new EtudiantController();
+        $EtudiantCours = $affichage->affichagecourses();
+        var_dump($EtudiantCours);
+        require_once('../App/Views/all-courses.php');
+        }
         break;
+
+        case '/course-page':
+            session_start();
+            if (!isset($_SESSION['id'])) {
+                header('Location: /login');
+                exit();
+            }
+            else
+            {
+            if( $_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            if(isset($_POST['enroll']))
+            {
+            $id_course =  $_POST['id'];
+            echo $id_course;  
+            $courseselectbyid = new  EtudiantController;
+            $course = $courseselectbyid->affichagecoursebyid($id_course);
+            var_dump($course);
+        }
+            require_once('../App/Views/course.php');
+            break;
+        }
+    }
+        break;
+
+        case 'my-courses':
+        require_once('../App/Views/My-courses.php');
+        
+
+
+
+
+
 
 
         case '/Enseignant-dashboard':
@@ -177,6 +286,8 @@ case '/my-courses':
                 header('Location: /login');
             }
             break;
+
+
 
 
         case '/courses-management':
@@ -218,16 +329,34 @@ case '/my-courses':
                 {
                     $categorieinsert = $value['ID'];
                 }
+                
                 echo $categorieinsert;
                 echo $_SESSION['id'];
                 $id_teacher = $_SESSION['id'];
+               
                 // var_dump($idcategorie);
-                $arraycourse = ['title' => $title , 'description' => $courseDescription , 'thumbnail' => $coursephoto , 'price' => $courseprice , 'document' =>  $coursedocument , 'Teacher_id' => $id_teacher , 'categorie_id' => $categorieinsert , 'id_tag' =>  $tagidinsert ];
-
+                $arraycourse = ['title' => $title , 'description' => $courseDescription , 'thumbnail' => $coursephoto , 'price' => $courseprice , 'document' =>  $coursedocument , 'Teacher_id' => $id_teacher , 'categorie_id' => $categorieinsert  , "status" => "Active" ];
+               
                 $courseinsert = new CourseController();
-                $courseinsert->CreateCours('course',$arraycourse);
+                 $courseinsert->CreateCours('course',$arraycourse);
+                
+               
+              
+
                 header('Location: /Enseignant-dashboard');
+           
+                
             }
+          
+      
+          
+          
+
+            $id_teacher = $_SESSION['id'];
+            $affichagecourse = new CourseController();
+             $rowcour = $affichagecourse->affichagecoursteacher($id_teacher);
+            //  var_dump($rowcour);
+            
             
 
                 
@@ -241,14 +370,96 @@ case '/my-courses':
 
             require_once('../App/Views/course-Enseignant.php');
     break;
+    case '/course-delete':
+        if( $_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            if(isset($_POST['deletecourse']))
+            {
+                echo "hello";
+                $id_delete = $_POST['id'];
+                echo $id_delete;
+                $deletecours = new CourseController();
+                $deletecours->Deletecours('course',$id_delete);
+                header('Location: /courses-management');
+            }
+        }
+
+        case '/course-delete-admin':
+            session_start();
+            if (!isset($_SESSION['id'])) {
+                header('Location: /login');
+                exit();
+            }
+            else
+            {
+            if( $_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                if(isset($_POST['deletecourse']))
+                {
+                    echo "hello";
+                    $id_delete = $_POST['id'];
+                    echo $id_delete;
+                    $deletecours = new CourseController();
+                    $deletecours->Deletecours('course',$id_delete);
+                    header('Location: /dashboard-admin');
+                }
+            }
+        }
+            break;
+            case '/course-edit-admin':
+                if( $_SERVER['REQUEST_METHOD'] === 'POST')
+                {
+                    if(isset($_POST['editcourse']))
+                    {
+                         $id_course =  $_POST['id'];
+
+
+                    }
+                    else if(isset($_POST['save']))
+                    {
+                         $id_course =  $_POST['id'];
+                         echo  $id_course;
+                        $title = $_POST['title'];
+                    $description = $_POST['description'];
+                    $thumbnail = $_POST['thumbnail'];
+                    $document = $_POST['document'];
+                    $price = $_POST['price'];
+                    $CourseEdit = new CourseController();
+                    $query = $CourseEdit->EditCourseById($id_course,$title,$description,$thumbnail,$document,$price);
+                    header('Location: /Admin-courses');
+                    }
+                     }
+                
+                require_once('../App/Views/course-edit-admin.php');
+                break;
+
+                case '/user-edit-admin':
+                    if( $_SERVER['REQUEST_METHOD'] === 'POST')
+                    {
+                        if(isset($_POST['edit-user']))
+                        {
+                            $id_user = $_POST['id'] ;
+                            echo $id_user;
+                        }
+                        if(isset($_POST['save']))
+                        {
+                            $id_user = $_POST['id'] ;
+                            echo $id_user;
+                        }
+
+                    }   
+
+                            require_once('../App/Views/edit-users-admin.php');
+                
+
+            }
+            
 
   
     
     
 
-    
-   
-}
+            
 
 
 ?>

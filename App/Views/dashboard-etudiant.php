@@ -161,33 +161,26 @@
     </div>
 
     <main>
-        <h2 class="section-title">Featured Courses</h2>
-        <div class="course-grid">
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Web Development" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">Web Development Fundamentals</h3>
-                    <p class="course-description">Learn HTML, CSS, and JavaScript basics</p>
-                    <a href="#" class="btn">Enroll Now</a>
-                </div>
-            </div>
+    <h2 class="section-title">All Courses</h2>
+    <div class="course-grid">
+        <?php
+        foreach($EtudiantCours as $value)
+        {
+            echo '
 
             <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Data Science" class="course-image">
+                <img src="'.$value['thumbnail'].'" class="course-image">
                 <div class="course-content">
-                    <h3 class="course-title">Data Science Essentials</h3>
-                    <p class="course-description">Master data analysis and visualization</p>
-                    <a href="#" class="btn">Enroll Now</a>
+                    <h3 class="course-title">'.$value['title'].'</h3>
+                    <p class="course-description">'.$value['description'].'</p>
+                    <form action="/course-page" method = "POST">
+                    <input  type="hidden" name = "id" value = "'.$value['ID'].'">
+                    <button name = "enroll"href="/course-page" class="btn">Enroll Now</button>
+                    </form>
                 </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Digital Marketing" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">Digital Marketing</h3>
-                    <p class="course-description">Learn modern marketing strategies</p>
-                    <a href="#" class="btn">Enroll Now</a>
-                </div>
+            </div>';
+        }
+        ?>
             </div>
         </div>
     </main>

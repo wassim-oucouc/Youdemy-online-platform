@@ -18,11 +18,60 @@ class Cours
    public function __construct()
    {
     $this->crudmodel = new CrudModel();
+    $this->connection = new connection();
    }
 
    public function InsertCourse($table,$names)
    {
     $this->crudmodel->Create($table,$names);
+    
+   }
+
+   public function SelectCourse()
+   {
+    $query = 'SELECT course.title,course.ID,course.thumbnail,course.description,course.price,course.created_at,course.document,course.Status ,users.Prenom,categorie.Nom AS categoriename from course INNER JOIN categorie ON course.categorie_id = categorie.ID  INNER join users ON course.Teacher_id = users.ID WHERE users.Role = "Enseignant"';
+   $exe =  $this->connection->connection()->prepare($query);
+   $exe->execute();
+   return $exe->fetchAll();
+    
+   }
+
+   public function SelectCourseByID($idcourse)
+   {
+ 
+    $query = 'SELECT course.title,course.ID,course.thumbnail,course.description,course.price,course.created_at,course.document,course.Status,course.document,users.Prenom,users.Nom,users.Photo,categorie.Nom AS categoriename from course INNER JOIN categorie ON course.categorie_id = categorie.ID  INNER join users ON course.Teacher_id = users.ID WHERE users.Role = "Enseignant" AND course.ID = :id ';
+   $exe =  $this->connection->connection()->prepare($query);
+   $exe->Bindvalue(':id',$idcourse);
+   $exe->execute();
+   return $exe->fetchAll();
+   }
+
+   public function SelectCourseEnseignant($id)
+   {
+    $query = 'SELECT course.title,course.ID,course.description,course.price,course.created_at,course.document,course.Status ,users.Prenom,categorie.Nom AS categoriename from course INNER JOIN categorie ON course.categorie_id = categorie.ID  INNER join users ON course.Teacher_id = users.ID WHERE users.Role = "Enseignant" AND users.ID = :id ';
+    $aff = $this->connection->connection()->prepare($query);
+    $aff->Bindvalue(':id',$id);
+    $aff->execute();
+    return $aff->fetchAll();
+
+   }
+   public function EditCourseByID($id,$title,$description,$thumbnail,$document,$Price)
+   {
+    $query = 'UPDATE course set title = :title,description = :description,thumbnail = :thumbnail,document = :document,price = :price where ID = :id';
+    $edit = $this->connection->connection()->prepare($query);
+    $edit->bindValue(':id',$id);
+    $edit->bindValue(':title',$title);
+    $edit->bindValue(':description',$description);
+    $edit->bindValue(':thumbnail',$thumbnail);
+    $edit->bindValue(':document',$document);
+    $edit->bindValue(':price',$Price);
+    $edit->execute();
+
+   }
+
+   public function deletecoursbyid($table,$id)
+   {
+    $this->crudmodel->DeleteById($table,$id);
    }
 
 public function GetId()

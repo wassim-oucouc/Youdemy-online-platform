@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses Management - YOUDEMY Admin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../Youdemy/App/Src/css/admin.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
     <div class="dashboard">
@@ -123,39 +123,52 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
-                            <th>Course</th>
+                            <th>Title</th>
                             <th>Category</th>
-                            <th>Students</th>
+                            <th>Tag</th>
                             <th>Price</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
+                        
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="course-info">
-                                    <div class="course-thumbnail">
-                                        <i class="fas fa-book"></i>
-                                    </div>
-                                    <div>
-                                        <div class="course-title">Complete Web Development 2024</div>
-                                        <div class="course-instructor">By John Smith</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Web Development</td>
-                            <td>1,234</td>
-                            <td class="price-tag">$99.99</td>
-                            <td><span class="status-badge status-active">Published</span></td>
-                            <td>
-                                <button class="btn" style="color: var(--primary);"><i class="fas fa-edit"></i></button>
-                                <button class="btn" style="color: var(--warning);"><i class="fas fa-eye"></i></button>
-                                <button class="btn" style="color: var(--danger);"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
+        <?php
+    foreach($cours as $value) {
+        echo '
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>
+                <div class="course-info">
+                    <div class="course-thumbnail">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div>
+                        <div class="course-title">'. $value['title'].'</div>
+                        <div class="course-instructor">' . "By" . " ". $value['Prenom'].'</div>
+                    </div>
+                </div>
+            </td>
+            <td>' . $value['categoriename'].'</td>
+            <td>' . $value['tagname'].'</td>
+            <td class="price-tag">'."$". $value['price'].'</td>
+            <td><span class="">' . $value['Status'].'</span></td>
+            <td>
+            <form action="/course-delete-admin" METHOD = "POST">
+            <input type="hidden" name = "id" value = "'.$value['ID'] .'">
+                <button name = "deletecourse"class="btn" style="color: var(--primary);"><i class="fas fa-trash"></i></button>
+                </form>
+                <form action="/course-edit-admin" METHOD ="POST">
+                <input name = "id" type="hidden" value = "'.$value['ID'] .'">
+                 <button name ="editcourse" class="btn" style="color: var(--danger);"><i class="fas fa-edit"></i></button>
+                 </form>
+                <button class="btn" style="color: var(--warning);"><i class="fas fa-eye"></i></button>
+               
+            </td>
+        </tr>';
+    }
+    ?>
+</tbody>
                 </table>
 
                 <!-- Pagination -->

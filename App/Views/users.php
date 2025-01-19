@@ -115,12 +115,13 @@
                             <td>'. $value['JoinDate'] .'</td>
                             <td>'. $value['Status'].'</td>
                             <td>
-                               
-                                <a href = "C:\xampp\htdocs\Youdemy\App\Controllers\AdminController.php" class "btn" style="color: var(--primary);">
-                                <i  class="fas fa-edit"></i></a>
+                               <form action="/user-edit-admin" method = "POST">
+                              <input type="hidden" name="id" value="'.$value['ID'].'">
+                                <button name = "edit-user" class="fas fa-edit" type  = "submit" style = "color:green;"</button>
+                                </form>
                                 <form action="/delete-user" method="POST">
     <input type="hidden" name="id" value="'.$value['ID'].'">
-    <button class="fas fa-trash" type="submit"></button>
+    <button class="fas fa-trash" type="submit" style = "color:red;"></button>
 </form>
                             </td>
                             <tr>';

@@ -20,20 +20,20 @@ class CategorieController
     public function Createcategorie($table,$infos)
     {
         $this->categorie->Insert($table,$infos);
-        // require_once('../App/Views/categories.php');
+        require_once('../App/Views/categories.php');
     }
 
     public function Findcategories($table)
     {
        return $row =  $this->categorie->FindAllcategories($table);
     //    var_dump($row);
-       require_once('../App/Views/categories.php');
+    //    require_once('../App/Views/categories.php');
     }   
 
     public function selectcategories($table)
     {
        return  $this->categorie->FindAllcategories($table);
-    //    require_once('../App/Views/course-Enseignant.php');
+       require_once('../App/Views/course-Enseignant.php');
     }   
     public function SelectIDbyName($name)
     {

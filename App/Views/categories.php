@@ -99,7 +99,7 @@
                     <div class="bg-white border border-4 rounded-lg shadow relative m-10">
                         <div class="flex items-start justify-between p-5 border-b rounded-t">
                               
-                             
+                                </svg>
                             </button>
                     </div>
                     <div class="categories-form p-6 space-y-6">

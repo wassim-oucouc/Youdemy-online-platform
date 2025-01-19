@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnHub - Courses</title>
+    <title>LearnHub</title>
     <style>
         * {
             margin: 0;
@@ -20,9 +20,6 @@
             padding: 1rem 8%;
             background: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .logo {
@@ -43,11 +40,6 @@
             font-weight: 500;
         }
 
-        .nav-links a.active {
-            color: #2563eb;
-            border-bottom: 2px solid #2563eb;
-        }
-
         .user-menu {
             display: flex;
             align-items: center;
@@ -60,44 +52,56 @@
             border-radius: 50%;
         }
 
-        /* Course Sections */
-        .page-container {
-            max-width: 1200px;
-            margin: 2rem auto;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(75, 85, 99, 0.9), rgba(75, 85, 99, 0.9)), url('/api/placeholder/1920/600');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
             padding: 0 1rem;
         }
 
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
             margin-bottom: 2rem;
         }
 
-        .page-title {
+        .btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
             font-size: 2rem;
             color: #4b5563;
-        }
-
-        .search-bar {
-            display: flex;
-            gap: 1rem;
             margin-bottom: 2rem;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .filter-select {
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 5px;
-            font-size: 1rem;
         }
 
         .course-grid {
@@ -111,11 +115,6 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
         }
 
         .course-image {
@@ -136,67 +135,7 @@
 
         .course-description {
             color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #6b7280;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #2563eb;
-            border-radius: 4px;
-        }
-
-        .btn {
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background: #1d4ed8;
-        }
-
-        .tab-container {
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 2rem;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .tab {
-            padding: 1rem 0;
-            color: #4b5563;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-        }
-
-        .tab.active {
-            color: #2563eb;
-            border-bottom-color: #2563eb;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -205,119 +144,41 @@
         <a href="#" class="logo">LearnHub</a>
         <div class="nav-links">
             <a href="#">Home</a>
-            <a href="#" >All Courses</a>
-            <a href="#" class="active">My Courses</a>
+            <a href="#">All Courses</a>
+            <a href="#">My Courses</a>
         </div>
         <div class="user-menu">
             <img src="/api/placeholder/32/32" alt="User">
             <span>John Doe</span>
+            <i class="fas fa-chevron-down"></i>
         </div>
     </nav>
 
-    <!-- All Courses Page -->
-    <div class="page-container" id="allCourses">
-        <div class="page-header">
-            <h1 class="page-title">My Courses</h1>
-        </div>
-        
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Search courses...">
-            <select class="filter-select">
-                <option value="">All Categories</option>
-                <option value="development">Development</option>
-                <option value="design">Design</option>
-                <option value="business">Business</option>
-            </select>
-        </div>
-
+    
+    <main>
+        <?php
+        foreach($EtudiantCours as $value)
+        {
+            echo '
+        <h2 class="section-title">All Courses</h2>
         <div class="course-grid">
             <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Python Programming" class="course-image">
+                <img src="'.$value['thumbnail'].'" class="course-image">
                 <div class="course-content">
-                    <h3 class="course-title">Python Programming</h3>
-                    <p class="course-description">Learn Python from scratch to advanced concepts</p>
-                    <div class="course-meta">
-                        <span>36 hours</span>
-                        <span>4.8 ⭐</span>
-                    </div>
-                    <a href="#" class="btn">Show Content</a>
+                    <h3 class="course-title">'.$value['title'].'</h3>
+                    <p class="course-description">'.$value['description'].'</p>
+                    <form action="/course-page" method = "POST">
+                    <input  type="hidden" name = "id" value = "'.$value['ID'].'">
+                    <button name = "enroll"href="/course-page" class="btn">Enroll Now</button>
+                    </form>
                 </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="UI/UX Design" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">UI/UX Design</h3>
-                    <p class="course-description">Master modern design principles and tools</p>
-                    <div class="course-meta">
-                        <span>28 hours</span>
-                        <span>4.9 ⭐</span>
-                    </div>
-                    <a href="#" class="btn">Show Content</a>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Business Analytics" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">Business Analytics</h3>
-                    <p class="course-description">Learn data-driven business decision making</p>
-                    <div class="course-meta">
-                        <span>42 hours</span>
-                        <span>4.7 ⭐</span>
-                    </div>
-                    <a href="#" class="btn">Show Content</a>
-                </div>
+            </div>';
+        }
+        ?>
             </div>
         </div>
-    </div>
-
-    <!-- My Courses Page -->
-    <div class="page-container" id="myCourses" style="display: none;">
-        <div class="page-header">
-            <h1 class="page-title">My Courses</h1>
-        </div>
-
-        <div class="tab-container">
-            <div class="tabs">
-                <div class="tab active">In Progress</div>
-                <div class="tab">Completed</div>
-            </div>
-        </div>
-
-        <div class="course-grid">
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Web Development" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">Web Development Fundamentals</h3>
-                    <p class="course-description">Learn HTML, CSS, and JavaScript basics</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 60%;"></div>
-                    </div>
-                    <div class="course-meta">
-                        <span>60% Complete</span>
-                        <span>12/20 Lessons</span>
-                    </div>
-                    <a href="#" class="btn">Continue Learning</a>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Data Science" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">Data Science Essentials</h3>
-                    <p class="course-description">Master data analysis and visualization</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 30%;"></div>
-                    </div>
-                    <div class="course-meta">
-                        <span>30% Complete</span>
-                        <span>6/20 Lessons</span>
-                    </div>
-                    <a href="#" class="btn">Continue Learning</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    </main>
 </body>
 </html>
+
+

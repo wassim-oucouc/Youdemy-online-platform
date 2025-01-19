@@ -72,6 +72,20 @@ class Users
   
 }
 
+public function EditUserById($id,$Prenom,$Nom,$Email,$Password,$Status,$Photo)
+{
+    $query = 'UPDATE course set title = :title,description = :description,thumbnail = :thumbnail,document = :document,price = :price where ID = :id';
+    $edit = $this->connection->connection()->prepare($query);
+    $edit->bindValue(':id',$id);
+    $edit->bindValue(':title',$title);
+    $edit->bindValue(':description',$description);
+    $edit->bindValue(':thumbnail',$thumbnail);
+    $edit->bindValue(':document',$document);
+    $edit->bindValue(':price',$Price);
+    $edit->execute();
+
+}
+
 public function BanUserByID($id)
 {
     $query = 'UPDATE users SET Status = "Suspendu" WHERE ID = :id';

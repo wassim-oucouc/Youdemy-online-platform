@@ -283,55 +283,52 @@
                  </select>
             </div>
             <div class="form-group">
-                <label for="courseLevel">Tags</label>
-                <select id="courseLevel" name="tags" required>
-                <option value="">Select Tags</option>
-                <?php
-                foreach($tagsrow as $value)
-                {
-                    echo '
-                <option value="'.$value['Nom'].'">'.$value['Nom'].'</option>
-                ';
-                }
+    <label for="courseLevel">Tags</label>
+    <div class="checkbox-group">
+        <?php
+        var_dump($id_course);
+        foreach($tagsrow as $value)
+        {
+            echo '
+            <label>
+                <input type="checkbox" name="tags[]" value="' . $value['ID'] . '"> ' . $value['Nom'] . '
+            </label>
+            <br>
+            ';
+        }
+        ?>
+    </div>
+</div>
                 
-                ?>
                 </select>
-            </div>
             </div>
             <button name = "Add" type="submit" class="btn btn-primary">Add Course</button>
         </form>
 
         <!-- Course Cards -->
         <div class="course-grid">
+            <?php
+            foreach($rowcour as $value)
+            {
+                echo '
             <div class="course-card">
-                <h3>Mathematics 101</h3>
-                <span class="course-code">MATH101</span>
-                <p class="course-info">Introduction to basic mathematics concepts including algebra, geometry, and trigonometry.</p>
-                <div class="stats">
-                    <span>25 Students</span>
-                    <span>|</span>
-                    <span>12 Weeks</span>
-                </div>
+                <h3>'.$value['title'].'</h3>
+                <span class="course-code">'.$value['categoriename'].'</span>
+                <p class="course-info">'.$value['description'].'</p>
                 <div class="card-actions">
+                <form action="/course-delete" method = "POST">
+                
+                   <button name="deletecourse" class="btn btn-danger">Delete</button>
+                    <input type="hidden" name="id" value = "'.$value['ID'].'">
+                     </form>
+                      <form action="/course-edit" method = "POST">
                     <button class="btn btn-edit">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                     </form>    
                 </div>
-            </div>
-
-            <div class="course-card">
-                <h3>Physics Fundamentals</h3>
-                <span class="course-code">PHYS101</span>
-                <p class="course-info">Basic physics concepts including mechanics, waves, and thermodynamics.</p>
-                <div class="stats">
-                    <span>20 Students</span>
-                    <span>|</span>
-                    <span>16 Weeks</span>
-                </div>
-                <div class="card-actions">
-                    <button class="btn btn-edit">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                </div>
-            </div>
+            </div>';
+            }
+        ?>
+        
         </div>
     </div>
 </body>

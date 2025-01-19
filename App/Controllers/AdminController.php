@@ -17,7 +17,7 @@ session_start();
         $rows =  $this->users->findAllusers('users');
         require_once('.././App/Views/dashboard-admin.php');
         echo $_SESSION['id'];
-    }
+    } 
     else
     {
         header('Location: /login');

@@ -231,46 +231,26 @@
         </div>
 
         <div class="course-grid">
+            <?php
+            foreach($EtudiantCours as $value)
+            {
+                echo '
             <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Python Programming" class="course-image">
+                <img src="'.$value['thumbnail'].'" class="course-image">
                 <div class="course-content">
-                    <h3 class="course-title">Python Programming</h3>
-                    <p class="course-description">Learn Python from scratch to advanced concepts</p>
+                    <h3 class="course-title">'.$value['title'].'</h3>
+                    <p class="course-description">'.$value['description'].'</p>
                     <div class="course-meta">
-                        <span>36 hours</span>
                         <span>4.8 ⭐</span>
                     </div>
-                    <a href="#" class="btn">Enroll Now</a>
+                    <form action="/course-page" method = "POST">
+                    <input name = "id" value = "'.$value['ID'].'" type="hidden">
+                    <button name = "enroll"href="/course-page" href="#" class="btn">Enroll Now</button>
+                    </form>
                 </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="UI/UX Design" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">UI/UX Design</h3>
-                    <p class="course-description">Master modern design principles and tools</p>
-                    <div class="course-meta">
-                        <span>28 hours</span>
-                        <span>4.9 ⭐</span>
-                    </div>
-                    <a href="#" class="btn">Enroll Now</a>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/api/placeholder/300/200" alt="Business Analytics" class="course-image">
-                <div class="course-content">
-                    <h3 class="course-title">Business Analytics</h3>
-                    <p class="course-description">Learn data-driven business decision making</p>
-                    <div class="course-meta">
-                        <span>42 hours</span>
-                        <span>4.7 ⭐</span>
-                    </div>
-                    <a href="#" class="btn">Enroll Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
+            </div>';
+            }
+            ?>
 
     <!-- My Courses Page -->
     <div class="page-container" id="myCourses" style="display: none;">
