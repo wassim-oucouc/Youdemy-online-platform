@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+.panel-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  width: 380px;
+}
+
+.panel-container h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.ratings-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0; /* Added margin to give gap between text and emojis */
+}
+
+.rating {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.rating img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.rating small {
+  font-size: 14px;
+  color: #555;
+}
+
+.rating.active img {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+  border-radius: 50%;
+}
+
+.rating:hover img {
+  transform: scale(1.1);
+}
+
+.btn {
+  background: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.thank-you {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.thank-you img {
+  margin-bottom: 20px;
+}
+
+.thank-you strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.thank-you p {
+  font-size: 16px;
+  color: #666;
+}
